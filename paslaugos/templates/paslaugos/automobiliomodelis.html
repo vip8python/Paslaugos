@@ -3,6 +3,6 @@
 {% block content %}
   <h1>Automobiliu modeliai</h1>
   {% for a in automobilio_modeliai %}
-    <li>{{a.marke}} - {{a.modelis}} </li>
+    <li><a href="{% url 'automobiliu_duomenys' a.id %}">{{a.marke}} - {{a.modelis}}</a> </li>
     {% endfor %}
 {% endblock %}

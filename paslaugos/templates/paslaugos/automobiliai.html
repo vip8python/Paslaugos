@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Automobiliai</h1>
-  <p>Automobiliu sąrašas.</p>
+  <p>Klientu sąrašas :</p>
   {% for a in automobiliai %}
     <li>{{a.klientas}} : {{a.valstybinis_nr}}  {{a.vin_kodas}} </li>
     {% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 
 
@@ -47,5 +47,8 @@ def paslauga(request):
     }
     return render(request, 'paslaugos/paslauga.html', context=context)
 
-
+def automobiliu_duomenys(request, automobilio_modelis_id):
+    automobilio_modelis = get_object_or_404(AutomobilioModelis, pk=automobilio_modelis_id)
+    automobiliai = automobilio_modelis.automobilis_set.all()
+    return render(request, 'paslaugos/automobilio_duomenys.html', {'automobiliai': automobiliai})
 

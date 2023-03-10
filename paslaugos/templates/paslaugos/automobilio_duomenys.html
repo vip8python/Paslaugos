@@ -1,0 +1,8 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+  <h1>Automobilio duomenys: </h1>
+  {% for a in automobilis.automobilis_set.all %}
+    <li>{{a.valstybinis_numeris}} - {{a.vin_kodas}} - {{a.klientas}} </li>
+    {% endfor %}
+{% endblock %}
