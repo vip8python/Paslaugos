@@ -1,0 +1,8 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+  <h1>Automobiliu modeliai</h1>
+  {% for a in automobilio_modeliai %}
+    <li>{{a.marke}} - {{a.modelis}} </li>
+    {% endfor %}
+{% endblock %}

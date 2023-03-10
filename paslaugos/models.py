@@ -20,7 +20,7 @@ class Automobilis(models.Model):
     automobilio_modelis = models.ForeignKey(AutomobilioModelis, on_delete=models.SET_NULL, null=True)
     vin_kodas = models.CharField(max_length=20, null=True)
     klientas = models.CharField(max_length=50, null=True)
-
+    defektai = models.TextField(max_length=2500, default='')
     class Meta:
         verbose_name = 'Automobilis'
         verbose_name_plural = 'Automobiliai'
@@ -62,7 +62,7 @@ class Uzsakymas(models.Model):
 class Paslauga(models.Model):
     pavadinimas = models.CharField(max_length=50, null=True)
     kaina = models.DecimalField(default=0, decimal_places=2, max_digits=8)
-
+    aprasymas = models.TextField(max_length=5000, default='')
     class Meta:
         verbose_name = 'Paslauga'
         verbose_name_plural = 'Paslaugos'

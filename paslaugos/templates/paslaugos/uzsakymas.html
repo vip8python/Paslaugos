@@ -1,0 +1,8 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+  <h1>Uzsakymai</h1>
+  {% for a in uzsakymas %}
+    <li>{{a.data}} - {{a.automobilis.automobilio_modelis}} : {{a.suma}} </li>
+    {% endfor %}
+{% endblock %}

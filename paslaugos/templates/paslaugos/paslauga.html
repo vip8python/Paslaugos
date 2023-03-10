@@ -1,0 +1,8 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+  <h1>Paslaugos : </h1>
+  {% for a in paslauga %}
+    <li>{{a.pavadinimas }}  -  {{a.kaina}} eur.</li>
+    {% endfor %}
+{% endblock %}
