@@ -2,12 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views import generic
 
+meniu = ['Prideti paslauga', 'Prideti uzsakyma', 'Prideti automobili']
+
+def index_meniu(request):
+    return render(request, 'paslaugos/index.html', {'meniu': meniu, 'title': 'pagrindinis puslapis}'})
 
 def index(request):
     num_modelis = AutomobilioModelis.objects.all().count()
     num_automobilis = Automobilis.objects.all().count()
     num_uzsakymas = Uzsakymas.objects.all().count()
-    num_paslauga = Paslauga.objects.all().count()
+    num_paslauga = Paslauga.objects.all()
     num_eilute = UzsakymoEilute.objects.all().count()
 
 
@@ -64,3 +68,6 @@ class SaskaitosDetailView(generic.DetailView):
         context = super(SaskaitosDetailView, self).get_context_data(**kwargs)
         context['uzsakymo_eilutes'] = UzsakymoEilute.objects.all()
         return context
+
+
+# class Add

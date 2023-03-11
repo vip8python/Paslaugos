@@ -3,10 +3,14 @@
   <h3>Autoservisas</h3>
   <p><b>Meniu:</b></p>
   <ul>
-    <li><strong>Paslaugų kiekis:</strong> {{ num_paslauga }}</li>
+    <li><strong>Paslaugos :</strong>
+      {% for i in num_paslauga %}
+      {{ i }},</li>
+    {% endfor %}
     <li><strong>Klientų kiekis:</strong> {{ num_uzsakymas }}</li>
     <li><strong>Modelių kiekis:</strong> {{ num_modelis }}</li>
     <li><strong>Automobilių kiekis:</strong> {{ num_automobilis }}</li>
-    <li><strong>Užsakymų eilučių kiekis:</strong> {{ num_eilute }}</li>
+    <li><strong>Užsakymų kiekis:</strong> {{ num_eilute }}</li>
   </ul>
+
 {% endblock %}
