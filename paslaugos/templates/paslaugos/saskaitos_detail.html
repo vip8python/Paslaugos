@@ -1,0 +1,22 @@
+{% extends "paslaugos/base.html" %}
+{% block content %}
+  <h5>Uzsakymo numeris: {{ uzsakymas.id }}</h5>
+    <br>
+    <p><strong>Klientas:</strong> {{ uzsakymas.automobilis }}</p>
+    <p><strong>Užsakymo data:</strong> {{ uzsakymas.data }}</p>
+    <p><strong>Sąskaitos suma:</strong> {{ uzsakymas.suma }}</p>
+    <p><strong>Suteiktos paslaugos:</strong> </p>
+    <ul>
+          {% for s in uzsakymo_eilutes %}
+            {% if s.uzsakymas_id == uzsakymas.id %}
+              <li>{{ s.uzsakymas.data }} - {{s.uzsakymas.automobilis}} - kiekis: {{ s.kiekis }} vnt. - kaina: {{ s.kaina }}</li>
+            {% endif %}
+          {% endfor %}
+    </ul>
+
+    <div style="margin-left:20px;margin-top:20px">
+    <h6>Užsakymo statusas:</h6>
+        <p class="{% if uzsakymas.statusas == 'p' %}text-success{% elif uzsakymas.statusas == 'i' %}text-danger{% else %}text-warning{% endif %}">
+         {{ uzsakymas.get_status_display }}</p>
+    </div>
+{% endblock %}

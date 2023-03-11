@@ -27,7 +27,7 @@ class Automobilis(models.Model):
         db_table = 'automobilis'
 
     def __str__(self):
-        return f'{self.klientas} : {self.automobilio_modelis} - {self.valstybinis_nr}'
+        return f'{self.klientas} : {self.automobilio_modelis} --> {self.valstybinis_nr}'
 
 
 class Uzsakymas(models.Model):

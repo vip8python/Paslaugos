@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from django.views import generic
 
 
 def index(request):
@@ -47,8 +48,19 @@ def paslauga(request):
     }
     return render(request, 'paslaugos/paslauga.html', context=context)
 
-def automobiliu_duomenys(request, automobilio_modelis_id):
-    automobilio_modelis = get_object_or_404(AutomobilioModelis, pk=automobilio_modelis_id)
-    automobiliai = automobilio_modelis.automobilis_set.all()
-    return render(request, 'paslaugos/automobilio_duomenys.html', {'automobiliai': automobiliai})
+def automobilio_duomenys(request, automobilis_id):
+    automobilio_modelis = get_object_or_404(Automobilis, pk=automobilis_id)
+    return render(request, 'paslaugos/automobilio_duomenys.html', {'automobilio_duomenys': automobilio_modelis})
 
+class SaskaitosListView(generic.ListView):
+    model = Uzsakymas
+    template_name = 'paslaugos/saskaitos_list.html'
+
+class SaskaitosDetailView(generic.DetailView):
+    model = Uzsakymas
+    template_name = 'paslaugos/saskaitos_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SaskaitosDetailView, self).get_context_data(**kwargs)
+        context['uzsakymo_eilutes'] = UzsakymoEilute.objects.all()
+        return context

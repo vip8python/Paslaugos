@@ -7,6 +7,8 @@ urlpatterns = [
     path('automobilio_modeliai/', automobilio_modeliai, name='automobilio_modeliai'),
     path('uzsakymas/', uzsakymas, name='uzsakymas'),
     path('paslauga/', paslauga, name='paslauga'),
-    path('automobilio_duomenys/<int:automobilio_modelis_id>/', automobiliu_duomenys, name='automobiliu_duomenys')
+    path('automobilio_duomenys/<int:automobilis_id>/', automobilio_duomenys, name='automobiliu_duomenys'),
+    path('saskaitos/', SaskaitosListView.as_view(), name='saskaitos'),
+    path('saskaitos/<int:pk>', SaskaitosDetailView.as_view(), name='saskaitos-detail')
 
 ]

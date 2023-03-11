@@ -1,8 +1,14 @@
 {% extends "paslaugos/base.html" %}
 
 {% block content %}
-  <h1>Automobilio duomenys: </h1>
-  {% for a in automobilis.automobilis_set.all %}
-    <li>{{a.valstybinis_numeris}} - {{a.vin_kodas}} - {{a.klientas}} </li>
-    {% endfor %}
+    <div>
+    <h4>{{ automobilio_duomenys }}</h4>
+    <br>
+        <h5>Rodoma detali informacija apie kliento - {{ automobilio_duomenys.klientas }} - automobilį:</h5>
+            <ul>
+                <li>Valstybinis numeris: {{ automobilio_duomenys.valstybinis_nr }}</li>
+                <li>Automibilio modelis: {{ automobilio_duomenys.automobilio_modelis }}</li>
+                <li>VIN numeris: {{ automobilio_duomenys.vin_kodas }}</li>
+            </ul>
+    </div>
 {% endblock %}
