@@ -1,6 +1,29 @@
 {% extends "paslaugos/base.html" %}
 
 {% block content %}
+{% load static %}
+    <h1>Automobiliai : </h1></br>
+    {% if automobiliai %}
+    <div class="row">
+      {% for auto in automobiliai %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if auto.virselis %}
+              <img src="{{ auto.virselis.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'paslaugos/images/22266848.jpg' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ auto.automobilio_modelis }}</h6>
+              <p class="card-text"><a href="{{ book.id }}">{{ auto.klientas }}</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>Automobiliu nėra.</p>
+    {% endif %}
 
   <h1>Automobiliai</h1>
   <p>Klientu sąrašas :</p>
@@ -11,23 +34,23 @@
     <h1>Klientai :</h1></br>
     {% if automobiliai %}
     <div class="row">
-      {% for book in automobiliai %}
+      {% for auto in automobiliai %}
         <div class="col-md-4 d-flex align-items-stretch">
           <div class="card mb-4 shadow-sm">
-            {% if book.cover %}
-              <img src="{{ book.cover.url }}" class="card-img-top" alt="...">
+            {% if auto.virselis %}
+              <img src="{{ auto.virselis.url }}" class="card-img-top" alt="...">
             {% else %}
-              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+              <img src="{% static 'paslaugos/images/not.jpg' %}" class="card-img-top">
             {% endif %}
             <div class="card-body">
-              <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
-              <p class="card-text"><a href="{{ book.id }}">{{ book.title }}</a></p>
+              <h6 class="card-subtitle mb-2 text-muted">{{ auto.automobilio_modelis }}</h6>
+              <p class="card-text"><a href="{{ book.id }}">{{ auto.valstybinis_nr }}</a></p>
             </div>
           </div>
         </div>
       {% endfor %}
     </div>
     {% else %}
-      <p>Bibliotekoje knygų nėra.</p>
+      <p>Automobiliu nėra.</p>
     {% endif %}
 {% endblock %}
