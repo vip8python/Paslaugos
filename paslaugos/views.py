@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from paslaugos.models import Uzsakymas, UzsakymoEilute, AutomobilioModelis, Automobilis, Paslauga
+from .models import Uzsakymas, UzsakymoEilute, AutomobilioModelis, Automobilis, Paslauga
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
