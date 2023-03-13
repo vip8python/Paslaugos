@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import *
+from paslaugos.models import Uzsakymas, UzsakymoEilute, AutomobilioModelis, Automobilis, Paslauga
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -11,7 +11,6 @@ def index(request):
     num_uzsakymas = Uzsakymas.objects.all().count()
     num_paslauga = Paslauga.objects.all()
     num_eilute = UzsakymoEilute.objects.all().count()
-
 
     context = {
         'num_modelis': num_modelis,

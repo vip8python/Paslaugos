@@ -5,7 +5,7 @@ from django.db.models import Sum
 class AutomobilioModelis(models.Model):
     marke = models.CharField(max_length=50)
     modelis = models.CharField(max_length=50)
-    virselis = models.ImageField(upload_to='virseliai', null=True)
+
 
     class Meta:
         verbose_name = 'Automobilio modelis'

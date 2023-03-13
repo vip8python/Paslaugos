@@ -8,8 +8,8 @@
       {% for auto in automobilio_modeliai %}
         <div class="col-md-4 d-flex align-items-stretch">
           <div class="card mb-4 shadow-sm">
-            {% if paslaugos.cover %}
-              <img src="{{ paslaugos.media.cover.url }}" class="card-img-top" alt="...">
+            {% if auto.virselis %}
+              <img src="{{ paslaugos.covers.url }}" class="card-img-top" alt="...">
             {% else %}
               <img src="{% static 'paslaugos/images/22266848.jpg' %}" class="card-img-top">
             {% endif %}
