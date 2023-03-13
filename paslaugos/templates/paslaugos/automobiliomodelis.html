@@ -1,6 +1,29 @@
 {% extends "paslaugos/base.html" %}
 
 {% block content %}
+{% load static %}
+    <h1>Automobiliu sarasas : </h1></br>
+    {% if automobilio_modeliai %}
+    <div class="row">
+      {% for auto in automobilio_modeliai %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if paslaugos.cover %}
+              <img src="{{ paslaugos.media.cover.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'paslaugos/images/22266848.jpg' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ auto.marke }}</h6>
+              <p class="card-text"><a href="{{ book.id }}">{{ auto.modelis }}</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>Automobiliu nėra.</p>
+    {% endif %}
   <h1>Automobiliu modeliai :</h1>
   {% for a in automobilio_modeliai %}
     <li><a href="{% url 'automobiliu_duomenys' a.id %}">{{a.marke}} - {{a.modelis}}</a> </li>

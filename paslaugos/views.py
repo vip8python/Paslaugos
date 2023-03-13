@@ -12,7 +12,6 @@ def index(request):
     num_paslauga = Paslauga.objects.all()
     num_eilute = UzsakymoEilute.objects.all().count()
 
-    meniu = ['Prideti paslauga', 'Prideti uzsakyma', 'Prideti automobili']
 
     context = {
         'num_modelis': num_modelis,
@@ -20,7 +19,7 @@ def index(request):
         'num_uzsakymas': num_uzsakymas,
         'num_paslauga': num_paslauga,
         'num_eilute': num_eilute,
-        'meniu': meniu
+
     }
     return render(request, 'paslaugos/index.html', context=context)
 
