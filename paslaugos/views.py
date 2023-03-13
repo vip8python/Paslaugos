@@ -70,5 +70,9 @@ class SaskaitosDetailView(generic.DetailView):
 
 def search(request):
     query = request.GET.get('query')
-    search_results = Automobilis.objects.filter(Q(klientas__icontains=query) | Q(automobilio_modelis__icontains=query))
+    search_results = Automobilis.objects.filter(Q(klientas__icontains=query)
+                                                | Q(automobilio_modelis__modelis__icontains=query)
+                                                | Q(automobilio_modelis__marke__icontains=query)
+                                                | Q(valstybinis_nr__icontains=query)
+                                                | Q(vin_kodas__icontains=query))
     return render(request, 'paslaugos/search.html', {'automobilis': search_results, 'query': query})
