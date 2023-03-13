@@ -1,0 +1,18 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+  <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+  </br>
+  {% if automobilis %}
+  <ul>
+    {% for a in automobilis %}
+      <li>
+        <a href="{{ a.id }}">{{ a.klientas }}</a> ({{a.automobilio_modelis}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Nieko neradome :(</p>
+  {% endif %}
+
+  {% endblock %}

@@ -21,6 +21,7 @@ class Automobilis(models.Model):
     vin_kodas = models.CharField(max_length=20, null=True)
     klientas = models.CharField(max_length=50, null=True)
     defektai = models.TextField(max_length=2500, default='')
+    virselis = models.ImageField(upload_to='covers', null=True)
     class Meta:
         verbose_name = 'Automobilis'
         verbose_name_plural = 'Automobiliai'

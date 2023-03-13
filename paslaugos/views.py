@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views import generic
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 def index(request):
@@ -28,14 +30,23 @@ def automobiliai(request):
     return render(request, 'paslaugos/automobiliai.html', {'automobiliai': automobiliai})
 
 
+# def automobiliai(request):
+#     paginator = Paginator(Automobilis.objects.all(), 2)
+#     page_number = request.GET.get('page')
+#     paged_automobilis = paginator.get_page(page_number)
+#     return render(request, 'paslaugos/automobiliai.html', {'automobilis': paged_automobilis})
+
 def automobilio_modeliai(request):
-    automobilio_modeliai = AutomobilioModelis.objects.all()
-    return render(request, 'paslaugos/automobiliomodelis.html', {'automobilio_modeliai': automobilio_modeliai})
+    paginator = Paginator(AutomobilioModelis.objects.all(), 2)
+    page_number = request.GET.get('page')
+    paged_auto = paginator.get_page(page_number)
+    return render(request, 'paslaugos/automobiliomodelis.html', {'automobilio_modeliai': paged_auto})
 
 
-def uzsakymas(request):
-    uzsakymas = Uzsakymas.objects.all()
-    return render(request, 'paslaugos/uzsakymas.html', {'uzsakymas': uzsakymas})
+class UzsakymaiListView(generic.ListView):
+    model = Uzsakymas
+    paginate_by = 2
+    template_name = 'paslaugos/uzsakymas.html'
 
 
 def paslauga(request):
@@ -61,3 +72,9 @@ class SaskaitosDetailView(generic.DetailView):
         context = super(SaskaitosDetailView, self).get_context_data(**kwargs)
         context['uzsakymo_eilutes'] = UzsakymoEilute.objects.all()
         return context
+
+
+def search(request):
+    query = request.GET.get('query')
+    search_results = Automobilis.objects.filter(Q(klientas__icontains=query) | Q(automobilio_modelis__icontains=query))
+    return render(request, 'paslaugos/search.html', {'automobilis': search_results, 'query': query})
