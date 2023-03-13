@@ -30,12 +30,6 @@ def automobiliai(request):
     return render(request, 'paslaugos/automobiliai.html', {'automobiliai': automobiliai})
 
 
-# def automobiliai(request):
-#     paginator = Paginator(Automobilis.objects.all(), 2)
-#     page_number = request.GET.get('page')
-#     paged_automobilis = paginator.get_page(page_number)
-#     return render(request, 'paslaugos/automobiliai.html', {'automobilis': paged_automobilis})
-
 def automobilio_modeliai(request):
     paginator = Paginator(AutomobilioModelis.objects.all(), 2)
     page_number = request.GET.get('page')

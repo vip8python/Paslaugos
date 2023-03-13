@@ -5,6 +5,7 @@
   {% for a in automobilio_modeliai %}
     <li><a href="{% url 'automobiliu_duomenys' a.id %}">{{a.marke}} - {{a.modelis}}</a> </li>
     {% endfor %}
+<br>
 <div class="container puslapiai">
     <nav aria-label="...">
         {% if automobilio_modeliai.has_other_pages %}

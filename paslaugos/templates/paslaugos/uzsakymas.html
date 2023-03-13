@@ -5,6 +5,7 @@
   {% for a in page_obj %}
     <li>{{a.data}} - {{a.automobilis.automobilio_modelis}} : {{a.suma}} </li>
     {% endfor %}
+<br>
   <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -23,3 +24,4 @@
     </span>
 </div>
 {% endblock %}
+
