@@ -9,9 +9,10 @@
         <div class="col-md-4 d-flex align-items-stretch">
           <div class="card mb-4 shadow-sm">
             {% if auto.automobiliomodelis.automobilis.virselis %}
-              <img src="{{ auto.virselis.url }}" class="card-img-top" alt="...">
+              <img src="{{ auto.virselis.url }}" width="200" height="150" class="card-img-top" alt="...">
             {% else %}
-              <img src="{% static 'paslaugos/images/not.jpg' %}" class="card-img-top">
+              <iframe width="150" height="150" src="https://www.youtube.com/embed/VTDB3mKx7jM"
+                      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             {% endif %}
             <div class="card-body">
               <h6 class="card-subtitle mb-2 text-muted">{{ auto.modelis }}</h6>

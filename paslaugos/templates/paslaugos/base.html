@@ -1,5 +1,11 @@
-
 <!DOCTYPE html>
+{% load static %}
+ <style>
+    body {
+      background-image: url("{% static 'paslaugos/images/fonas.jpg' %}");
+      background-size: cover;
+    }
+  </style>
 <html lang="en">
 <head>
     {% block title %}<title>Autoservisas</title>{% endblock %}
@@ -17,8 +23,12 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Pradžia</a>            </li>
-            <li class="nav-item active"><a class="nav-link" href="{% url 'automobilio_modeliai' %}">modeliai</a>        </li>
+            <li class="nav-item">
+  <a class="navbar-brand" href="{% url 'index' %}">
+    <img src="{% static 'paslaugos/images/22266848.jpg' %}" alt='pradzia' width="50", height="50">
+  </a>
+</li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'automobilio_modeliai' %}">modeliai</a>  </li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'uzsakymas' %}">uzsakymai</a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'automobiliai' %}">automobiliai</a>
             {% if user.is_authenticated %}
