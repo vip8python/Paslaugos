@@ -11,4 +11,5 @@ urlpatterns = [
     path('saskaitos/', SaskaitosListView.as_view(), name='saskaitos'),
     path('saskaitos/<int:pk>', SaskaitosDetailView.as_view(), name='saskaitos-detail'),
     path('search/', search, name='search'),
+    path('logout/', CustomLogout.as_view(), name='logout')
     ]

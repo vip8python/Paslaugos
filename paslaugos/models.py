@@ -6,7 +6,6 @@ class AutomobilioModelis(models.Model):
     marke = models.CharField(max_length=50)
     modelis = models.CharField(max_length=50)
 
-
     class Meta:
         verbose_name = 'Automobilio modelis'
         verbose_name_plural = 'Automobilio modeliai'
@@ -23,6 +22,7 @@ class Automobilis(models.Model):
     klientas = models.CharField(max_length=50, null=True)
     defektai = models.TextField(max_length=2500, default='')
     virselis = models.ImageField(upload_to='covers', null=True)
+
     class Meta:
         verbose_name = 'Automobilis'
         verbose_name_plural = 'Automobiliai'
@@ -65,6 +65,7 @@ class Paslauga(models.Model):
     pavadinimas = models.CharField(max_length=50, null=True)
     kaina = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     aprasymas = models.TextField(max_length=5000, default='')
+
     class Meta:
         verbose_name = 'Paslauga'
         verbose_name_plural = 'Paslaugos'
@@ -94,4 +95,3 @@ class UzsakymoEilute(models.Model):
         uzsakymas = self.uzsakymas
         uzsakymas.suma = uzsakymas.uzsakymoeilute_set.all().aggregate(Sum('kaina'))['kaina__sum'] or 0
         uzsakymas.save()
-

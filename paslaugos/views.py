@@ -1,5 +1,6 @@
+from django.contrib.auth.views import LogoutView
 from django.shortcuts import render, get_object_or_404
-from .models import Uzsakymas, UzsakymoEilute, AutomobilioModelis, Automobilis, Paslauga
+from .models import *
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -12,12 +13,16 @@ def index(request):
     num_paslauga = Paslauga.objects.all()
     num_eilute = UzsakymoEilute.objects.all().count()
 
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_modelis': num_modelis,
         'num_automobilis': num_automobilis,
         'num_uzsakymas': num_uzsakymas,
         'num_paslauga': num_paslauga,
         'num_eilute': num_eilute,
+        'num_visits': num_visits,
 
     }
     return render(request, 'paslaugos/index.html', context=context)
@@ -74,3 +79,9 @@ def search(request):
                                                 | Q(valstybinis_nr__icontains=query)
                                                 | Q(vin_kodas__icontains=query))
     return render(request, 'paslaugos/search.html', {'automobilis': search_results, 'query': query})
+
+class CustomLogout(LogoutView):
+    template_name = 'registration/logged_out.html'
+
+
+
