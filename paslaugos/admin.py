@@ -2,9 +2,20 @@ from django.contrib import admin
 from .models import *
 
 class UzsakymasAdmin(admin.ModelAdmin):
-    list_display = ('automobilis', 'data')
+    list_display = ('automobilis', 'status', 'atsiemimo_data', 'data', 'suma')
+    list_editable = ('status', 'atsiemimo_data')
+    list_filter = ('status', 'atsiemimo_data')
     list_display_links = ('automobilis',)
-    search_fields = ('data',)
+    search_fields = ( 'automobilis__automobilio_modelis', )
+
+    fieldsets = (
+        (None, {
+            'fields': ('automobilis',)
+        }),
+        ('Availability', {
+            'fields': ('status', 'atsiemimo_data', 'vartotojas')
+        }),
+    )
 
 class AutomobilisAdmin(admin.ModelAdmin):
     list_display = ('klientas', 'automobilio_modelis',

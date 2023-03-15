@@ -4,6 +4,7 @@
 {% block content %}
     <div>
     <h4>{{ automobilio_duomenys }}</h4>
+        <p>{{ automobilio_duomenys.defektai | safe}}</p>
     <br>
         <h5>Rodoma detali informacija apie kliento - {{ automobilio_duomenys.klientas }} - automobilį:</h5>
             <ul>

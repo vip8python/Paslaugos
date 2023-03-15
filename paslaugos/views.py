@@ -4,6 +4,7 @@ from .models import *
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -83,5 +84,11 @@ def search(request):
 class CustomLogout(LogoutView):
     template_name = 'registration/logged_out.html'
 
+class AutoByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Uzsakymas
+    template_name = 'paslaugos/vartotojo_auto.html'
+    paginate_by = 10
 
+    def get_queryset(self):
+        return Uzsakymas.objects.filter(vartotojas=self.request.user).filter(status__exact='v').order_by('atsiemimo_data')
 

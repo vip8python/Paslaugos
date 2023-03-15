@@ -1,6 +1,8 @@
 {% extends "paslaugos/base.html" %}
 
 {% block content %}
+
+<p>{{ defektai | safe }}</p>
 {% load static %}
     <h1>Automobiliai : </h1></br>
     {% if automobiliai %}

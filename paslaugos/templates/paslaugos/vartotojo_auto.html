@@ -1,0 +1,19 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+    <h1>Mano remontojuomi automobiliai: </h1>
+
+    {% if uzsakymas_list %}
+    <ul>
+
+      {% for u in uzsakymas_list %}
+      <li class="{% if u.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'automobiliu_duomenys' u.automobilis_id %}">{{u.automobilio_modelis.modelis}}</a> ({{ u.atsiemimo_data }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Šiuo metu nera automobiliu.</p>
+    {% endif %}       
+{% endblock %}

@@ -23,6 +23,8 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('paslaugos/', include('paslaugos.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('', RedirectView.as_view(url='paslaugos/', permanent=True))
 ] + (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

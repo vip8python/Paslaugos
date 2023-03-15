@@ -1,5 +1,9 @@
 from django.db import models
 from django.db.models import Sum
+from django.contrib.auth.models import User
+from datetime import date, datetime
+import pytz
+from tinymce.models import HTMLField
 
 
 class AutomobilioModelis(models.Model):
@@ -20,8 +24,8 @@ class Automobilis(models.Model):
     automobilio_modelis = models.ForeignKey(AutomobilioModelis, on_delete=models.SET_NULL, null=True)
     vin_kodas = models.CharField(max_length=20, null=True)
     klientas = models.CharField(max_length=50, null=True)
-    defektai = models.TextField(max_length=2500, default='')
-    virselis = models.ImageField(upload_to='covers', null=True)
+    defektai = HTMLField()
+    virselis = models.ImageField(upload_to='covers', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Automobilis'
@@ -36,6 +40,13 @@ class Uzsakymas(models.Model):
     data = models.DateTimeField(auto_now=True)
     automobilis = models.ForeignKey(Automobilis, on_delete=models.CASCADE, null=True)
     suma = models.DecimalField(default=0, decimal_places=2, max_digits=8)
+    vartotojas = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    atsiemimo_data = models.DateTimeField(null=True, blank=True)
+    @property
+    def is_overdue(self):
+        if self.atsiemimo_data and datetime.today().replace(tzinfo=pytz.utc) > self.atsiemimo_data.replace(tzinfo=pytz.utc):
+            return True
+        return False
 
     STATUSAS = (
         ('p', 'Priimtas'),
@@ -51,11 +62,15 @@ class Uzsakymas(models.Model):
                               help_text='Pažymėti užsakymo statusą, pirminis - "Suformuotas"',
                               )
 
+
+
     class Meta:
         ordering = ['data']
         verbose_name = 'Uzsakymas'
         verbose_name_plural = 'Uzsakymai'
         db_table = 'uzsakymas'
+
+
 
     def __str__(self):
         return f"{self.data.strftime('%Y-%m-%d %H:%M')} - {self.automobilis} : {self.suma}"
@@ -64,7 +79,7 @@ class Uzsakymas(models.Model):
 class Paslauga(models.Model):
     pavadinimas = models.CharField(max_length=50, null=True)
     kaina = models.DecimalField(default=0, decimal_places=2, max_digits=8)
-    aprasymas = models.TextField(max_length=5000, default='')
+    aprasymas = HTMLField()
 
     class Meta:
         verbose_name = 'Paslauga'
