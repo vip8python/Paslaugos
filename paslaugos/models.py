@@ -87,7 +87,7 @@ class Paslauga(models.Model):
         db_table = 'paslaugos'
 
     def __str__(self):
-        return f'{self.pavadinimas}'
+        return f'{self.pavadinimas} {self.aprasymas}'
 
 
 class UzsakymoEilute(models.Model):

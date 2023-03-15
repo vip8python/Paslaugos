@@ -51,6 +51,10 @@ def paslauga(request):
     paslauga = Paslauga.objects.all()
     return render(request, 'paslaugos/paslauga.html', {'paslauga': paslauga})
 
+# def get_full_text(request):
+#     paslauga = Paslauga.objects.all()
+#     return render(request, 'paslaugos/paslauga.html', {'aprasymas': paslauga.aprasymas})
+
 
 def automobilio_duomenys(request, automobilis_id):
     automobilio_modelis = get_object_or_404(Automobilis, pk=automobilis_id)

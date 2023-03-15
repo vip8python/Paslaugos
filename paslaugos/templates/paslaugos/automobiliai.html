@@ -17,7 +17,7 @@
                       frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             {% endif %}
             <div class="card-body">
-              <h6 class="card-subtitle mb-2 text-muted">{{ auto.automobilio_modelis }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">< {{ auto.automobilio_modelis }}> {{auto.valstybinis_nr}}</h6>
               <p class="card-text"><a href="{{ book.id }}">{{ auto.klientas }}</a></p>
             </div>
           </div>
@@ -33,28 +33,4 @@
   {% for a in automobiliai %}
     <li>{{a.klientas}} : {{a.valstybinis_nr}}  {{a.vin_kodas}} </li>
     {% endfor %}
-{% load static %}
-    <h1>Klientai :</h1></br>
-    {% if automobiliai %}
-    <div class="row">
-      {% for auto in automobiliai %}
-        <div class="col-md-4 d-flex align-items-stretch">
-          <div class="card mb-4 shadow-sm">
-            {% if auto.virselis %}
-              <img src="{{ auto.virselis.url }}" width="200" height="150" class="card-img-top" alt="...">
-            {% else %}
-              <iframe width="150" height="150" src="https://www.youtube.com/embed/cKp7IEDK28c"
-                      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            {% endif %}
-            <div class="card-body">
-              <h6 class="card-subtitle mb-2 text-muted">{{ auto.automobilio_modelis }}</h6>
-              <p class="card-text"><a href="{{ book.id }}">{{ auto.valstybinis_nr }}</a></p>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-    {% else %}
-      <p>Automobiliu nėra.</p>
-    {% endif %}
 {% endblock %}

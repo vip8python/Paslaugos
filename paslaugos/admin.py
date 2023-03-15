@@ -6,7 +6,7 @@ class UzsakymasAdmin(admin.ModelAdmin):
     list_editable = ('status', 'atsiemimo_data')
     list_filter = ('status', 'atsiemimo_data')
     list_display_links = ('automobilis',)
-    search_fields = ( 'automobilis__automobilio_modelis', )
+    search_fields = ('automobilis__automobilio_modelis', )
 
     fieldsets = (
         (None, {
