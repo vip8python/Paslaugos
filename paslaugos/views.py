@@ -146,3 +146,8 @@ def register(request):
             messages.error(request, 'Slaptažodžiai nesutampa!')
             return redirect('register')
     return render(request, 'paslaugos/register.html')
+
+
+
+
+

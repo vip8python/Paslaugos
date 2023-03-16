@@ -40,7 +40,7 @@
             <li class="nav-item active"><a class="nav-link" href="{% url 'manoauto' %}">Mano automobiliai</a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"?next=/paslaugos/logout>Atsijungti</a></li>
           {% else %}
-            <li class="nav-item active"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Prisijungti</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Prisijungti</a></li>
 
             <li class="nav-item active"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
           {% endif %}

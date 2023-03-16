@@ -1,6 +1,6 @@
 {% extends "paslaugos/base.html" %}
 {% block content %}
-  <h1>{{ uzsakymas.id }} | {{ uzsakymas.data }}</h1>
+  <h3>{{ uzsakymas.id }} | {{ uzsakymas.data }}</h3>
 
   <div style="margin-top:50px">
   <p><strong>Automobilis:</strong> {{ uzsakymas.automobilis }}</p>
@@ -27,9 +27,11 @@
     <h4>Palikite atsiliepimą:</h4>
     <form action="" method="post">
       {% csrf_token %}
-      {{ form.content }}</br>
-      <input type="submit" value="Išsaugoti">
-    </form>
+    {{ form }}
+    <input type="submit" />
+    <button class='js-captcha-refresh'></button>
+</form>
+
   </div>
   {% endif %}
 
