@@ -6,6 +6,7 @@ import pytz
 from tinymce.models import HTMLField
 
 
+
 class AutomobilioModelis(models.Model):
     marke = models.CharField(max_length=50)
     modelis = models.CharField(max_length=50)
@@ -42,6 +43,8 @@ class Uzsakymas(models.Model):
     suma = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     vartotojas = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     atsiemimo_data = models.DateTimeField(null=True, blank=True)
+    aprasymas = models.TextField('Problemos aprašymas', max_length=2000, default='', null=True, blank=True)
+
     @property
     def is_overdue(self):
         if self.atsiemimo_data and datetime.today().replace(tzinfo=pytz.utc) > self.atsiemimo_data.replace(tzinfo=pytz.utc):
@@ -110,3 +113,15 @@ class UzsakymoEilute(models.Model):
         uzsakymas = self.uzsakymas
         uzsakymas.suma = uzsakymas.uzsakymoeilute_set.all().aggregate(Sum('kaina'))['kaina__sum'] or 0
         uzsakymas.save()
+
+
+class UzsakymasReview(models.Model):
+    uzsakymas = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True, blank=True)
+    reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    content = models.TextField('Atsiliepimas', max_length=2000)
+
+    class Meta:
+        verbose_name = "Atsiliepimas"
+        verbose_name_plural = 'Atsiliepimai'
+        ordering = ['-date_created']

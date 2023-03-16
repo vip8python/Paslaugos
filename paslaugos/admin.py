@@ -30,7 +30,10 @@ class PaslaugaAdmin(admin.ModelAdmin):
     search_fields = ('pavadinimas',)
 
 
+class UzsakymasReviewAdmin(admin.ModelAdmin):
+    list_display = ('uzsakymas', 'date_created', 'reviewer', 'content')
 
+admin.site.register(UzsakymasReview, UzsakymasReviewAdmin)
 admin.site.register(AutomobilioModelis)
 admin.site.register(Automobilis, AutomobilisAdmin)
 admin.site.register(Uzsakymas, UzsakymasAdmin)

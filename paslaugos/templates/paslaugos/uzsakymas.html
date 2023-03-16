@@ -3,9 +3,13 @@
 {% block content %}
 
   <h1>Uzsakymai :</h1>
-  {% for a in page_obj %}
-    <li>{{a.data}} - {{a.automobilis.automobilio_modelis}} : {{a.suma}} </li>
+  <ul>
+    {% for uzsakymas in uzsakymas_list %}
+      <li>
+        <a href="{{ uzsakymas.id }}">{{ uzsakymas.id }} | {{ uzsakymas.data }} >>> {{ uzsakymas.automobilis }}</a>
+      </li>
     {% endfor %}
+  </ul>
 <br>
   <div class="pagination">
     <span class="step-links">
@@ -23,6 +27,8 @@
             <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a>
         {% endif %}
     </span>
+
 </div>
+     </br>
 {% endblock %}
 
