@@ -6,19 +6,10 @@
   <p><strong>Automobilis:</strong> {{ uzsakymas.automobilis }}</p>
   <p><strong>Užsakymo suma:</strong> {{ uzsakymas.suma }}</p>
   <p><strong>Užsakymo statusas:</strong> {{ uzsakymas.get_status_display }}</p>
-  <p><strong>Problemos aprašymas:</strong></p>
-  <p>{{ uzsakymas.aprasymas }}</p>
-  <hr/>
+    <hr/>
   </hr>
   </div>
   <div style="margin-left:20px;margin-top:20px">
-    <h4>Eilutės:</h4>
-
-    {% for eilute in uzsakymas.uzsakymo_eilute.all %}
-      <p><strong>Paslauga:</strong> {{ eilute.paslauga.pavadinimas }} |
-        <strong>Paslaugos galutinė kaina:</strong> {{ eilute.kiekis }}
-          vnt x {{ eilute.paslauga.paslaugos_kaina }} Eur = {{ eilute.kaina }} Eur</p>
-    {% endfor %}
     </br>
   <h4>Atsiliepimai:</h4>
   {% if uzsakymas.uzsakymasreview_set.all %}
@@ -28,7 +19,7 @@
       <p>{{ uzs.content }}</p>
     {% endfor %}
   {% else %}
-    <p>Knyga neturi atsiliepimų</p>
+    <p>Automobilis neturi atsiliepimų</p>
       {% endif %}
       {% if user.is_authenticated %}
   <div class="fieldWrapper">

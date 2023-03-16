@@ -73,16 +73,9 @@ class UzsakymasDetailView(FormMixin, generic.DetailView):
         form.save()
         return super(UzsakymasDetailView, self).form_valid(form)
 
-
-
-
 def paslauga(request):
     paslauga = Paslauga.objects.all()
     return render(request, 'paslaugos/paslauga.html', {'paslauga': paslauga})
-
-# def get_full_text(request):
-#     paslauga = Paslauga.objects.all()
-#     return render(request, 'paslaugos/paslauga.html', {'aprasymas': paslauga.aprasymas})
 
 
 def automobilio_duomenys(request, automobilis_id):
