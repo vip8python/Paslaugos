@@ -1,11 +1,10 @@
 {% extends "paslaugos/base.html" %}
 
 {% block content %}
-    <h1>Mano remontojuomi {{}}automobiliai: </h1>
 
+<ul>
     {% if uzsakymas_list %}
-    <ul>
-
+    <h1>Mano remontuojami "{{ uzsakymas_list.0.vartotojas }}" automobiliai: </h1>
       {% for u in uzsakymas_list %}
       <li class="{% if u.is_overdue %}text-danger{% endif %}">
         <a href="{% url 'automobiliu_duomenys' u.automobilis_id %}">{{u.automobilio_modelis.modelis}}</a> ({{ u.atsiemimo_data }})
