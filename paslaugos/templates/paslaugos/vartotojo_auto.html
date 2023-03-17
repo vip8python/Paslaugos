@@ -5,6 +5,12 @@
 <ul>
     {% if uzsakymas_list %}
     <h1>Mano remontuojami "{{ uzsakymas_list.0.vartotojas }}" automobiliai: </h1>
+    <img class="rounded-circle" src="{{uzsakymas_list.0.vartotojas.profilis.nuotrauka.url}}" style="width:50px; height:50px;">
+    <iframe src="https://giphy.com/embed/oXKxyPM7oTIMYz4RJi" width="200" height="200" frameBorder="0" class="giphy-embed" allowFullScreen>
+
+    </iframe>
+    <p><a href="https://giphy.com/gifs/creative-courage-funny-kids-child-checks-cashed-drifting-kid-oXKxyPM7oTIMYz4RJi"></a>
+    </p>
       {% for u in uzsakymas_list %}
       <li class="{% if u.is_overdue %}text-danger{% endif %}">
         <a href="{% url 'automobiliu_duomenys' u.automobilis_id %}">{{u.automobilio_modelis.modelis}}</a> ({{ u.atsiemimo_data }})

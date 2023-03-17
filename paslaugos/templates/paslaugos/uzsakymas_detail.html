@@ -30,9 +30,15 @@
       {% csrf_token %}
     {{ form }}
     <input type="submit" />
-    <button class='js-captcha-refresh'></button>
+    <button class='js-captcha-refresh'>Atnaujinti  Captcha</button>
 </form>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+       <script type="text/javascript">
+      $('#id_content').emojioneArea({pickerPosition: 'bottom'
+  });
+</script>
   </div>
   {% endif %}
 
