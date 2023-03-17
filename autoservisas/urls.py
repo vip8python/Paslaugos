@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('paslaugos/', include('paslaugos.urls')),
     path('captcha/', include('captcha.urls')),
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('', RedirectView.as_view(url='paslaugos/', permanent=True))

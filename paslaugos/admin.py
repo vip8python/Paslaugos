@@ -39,6 +39,8 @@ admin.site.register(Automobilis, AutomobilisAdmin)
 admin.site.register(Uzsakymas, UzsakymasAdmin)
 admin.site.register(UzsakymoEilute)
 admin.site.register(Paslauga, PaslaugaAdmin)
+admin.site.register(Profilis)
 
 admin.site.site_title = 'autoservisas'
 admin.site.site_header = 'Autoserviso admin puslapis'
+

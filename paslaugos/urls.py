@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
     path('', index, name='index'),
+    # re_path(r'^hello/$', hello_world),
     path('automobiliai/', automobiliai, name='automobiliai'),
     path('automobilio_modeliai/', automobilio_modeliai, name='automobilio_modeliai'),
     path('uzsakymai/', UzsakymaiListView.as_view(), name='uzsakymas'),
@@ -15,4 +16,5 @@ urlpatterns = [
     path('logout/', CustomLogout.as_view(), name='logout'),
     path('manoauto/', AutoByUserListView.as_view(), name='manoauto'),
     path('register/', register, name='register'),
+    path('profilis/', profilis, name='profilis'),
     ]

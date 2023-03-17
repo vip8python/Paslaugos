@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+from emoji.settings import EMOJI_IMG_TAG, EMOJI_ALT_AS_UNICODE, EMOJI_REPLACE_HTML_ENTITIES
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,8 +33,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'paslaugos',
+    'paslaugos.apps.PaslaugosConfig',
     'tinymce',
+    'emoji',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'emoji.middleware.EmojiMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -166,4 +172,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar': True,
     }
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 
-from .models import UzsakymasReview
+from .models import UzsakymasReview, Profilis
 from django import forms
 from captcha.fields import CaptchaField
+from django.contrib.auth.models import User
 
 class UzsakymasReviewForm(forms.ModelForm):
     captcha = CaptchaField()
@@ -12,12 +13,16 @@ class UzsakymasReviewForm(forms.ModelForm):
         fields = ('content', 'uzsakymas', 'reviewer', 'captcha')
         widgets = {'uzsakymas': forms.HiddenInput(), 'reviewer': forms.HiddenInput()}
 
-    # def some_view(request):
-    #     if request.POST:
-    #         form = UzsakymasReviewForm(request.POST)
-    #         if form.is_valid():
-    #             human = True
-    #     else:
-    #         form = UzsakymasReviewForm()
-    #     return render(request, 'paslaugos/uzsakymas_detail.html', {'form': form})
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfilisUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profilis
+        fields = ['nuotrauka']
 
