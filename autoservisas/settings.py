@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'paslaugos.apps.PaslaugosConfig',
     'tinymce',
-    'emoji',
     'crispy_forms',
     'crispy_bootstrap4',
     'django.contrib.admin',
@@ -49,7 +48,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'emoji.middleware.EmojiMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

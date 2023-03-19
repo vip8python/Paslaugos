@@ -3,7 +3,6 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='index'),
-    # re_path(r'^hello/$', hello_world),
     path('automobiliai/', automobiliai, name='automobiliai'),
     path('automobilio_modeliai/', automobilio_modeliai, name='automobilio_modeliai'),
     path('uzsakymai/', UzsakymaiListView.as_view(), name='uzsakymas'),
