@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import UzsakymasReview, Profilis
+from .models import *
 from django import forms
 from captcha.fields import CaptchaField
 from django.contrib.auth.models import User
@@ -25,4 +25,19 @@ class ProfilisUpdateForm(forms.ModelForm):
     class Meta:
         model = Profilis
         fields = ['nuotrauka']
+
+class UserAutomobilisCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Uzsakymas
+        fields = ['vartotojas', 'automobilis', 'atsiemimo_data']
+        widgets = {'vartotojas': forms.HiddenInput, 'atsiemimo_data': forms.DateTimeInput(format=('%Y-%m-%dT%H:%M'), attrs={'type': 'datetime-local'})}
+
+
+
+
+
+
+
+
 

@@ -1,6 +1,10 @@
 from django.urls import path, re_path
 from .views import *
 
+
+
+
+
 urlpatterns = [
     path('', index, name='index'),
     path('automobiliai/', automobiliai, name='automobiliai'),
@@ -14,6 +18,9 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('logout/', CustomLogout.as_view(), name='logout'),
     path('manoauto/', AutoByUserListView.as_view(), name='manoauto'),
+    path('manoautomobiliai/new', UzsakymasByUserCreateView.as_view(), name='manoauto_new'),
     path('register/', register, name='register'),
     path('profilis/', profilis, name='profilis'),
+    path('manoautomobiliai/<int:pk>/update', UzsakymasByUserUpdateView.as_view(), name='my-automobiliai-update'),
+    # path('manoautomobiliai/<int:pk>/delete', UzsakymasByUserDeleteView.as_view(), name='my-automobiliai-delete'),
     ]

@@ -46,6 +46,7 @@ class Uzsakymas(models.Model):
     atsiemimo_data = models.DateTimeField(null=True, blank=True)
     aprasymas = models.TextField('Problemos aprašymas', max_length=2000, default='', null=True, blank=True)
 
+
     @property
     def is_overdue(self):
         if self.atsiemimo_data and datetime.today().replace(tzinfo=pytz.utc) > self.atsiemimo_data.replace(tzinfo=pytz.utc):
@@ -99,6 +100,7 @@ class UzsakymoEilute(models.Model):
     uzsakymas = models.ForeignKey(Uzsakymas, on_delete=models.SET_NULL, null=True)
     kiekis = models.IntegerField(default=0)
     kaina = models.DecimalField(default=0, decimal_places=2, max_digits=8)
+
 
     class Meta:
         verbose_name = 'Uzsakymo eilute'

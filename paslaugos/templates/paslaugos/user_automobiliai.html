@@ -1,0 +1,19 @@
+{% extends "paslaugos/base.html" %}
+
+{% block content %}
+    <h1>Mano uzsakymai:</h1>
+    <hr>
+        <ul>
+        <img class="rounded-circle" src="{{object.vartotojas.profilis.nuotrauka.url}}">
+        <li><strong class="{% if object.atsiemimo_data %}text-danger{% endif %}">Pavadinimas: {{object.automobilis}}</strong></li>
+        <li><strong>Gražinimo terminas:</strong> {{object.atsiemimo_data}}</li>
+            {% if object.vartotojas == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'my-automobiliai-update' object.id %}">Redaguoti</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'my-automobiliai-delete' object.id %}">Ištrinti</a>
+            </div>
+            {% endif %}
+        <br/>
+      </li>
+    </ul>
+{% endblock %}

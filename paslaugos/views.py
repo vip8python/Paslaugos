@@ -9,9 +9,10 @@ from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import UzsakymasReviewForm
+from .forms import UzsakymasReviewForm, UserAutomobilisCreateForm
 from django.contrib.auth.decorators import login_required
 from .forms import UzsakymasReviewForm, UserUpdateForm, ProfilisUpdateForm
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 def index(request):
@@ -118,7 +119,7 @@ class AutoByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Uzsakymas.objects.filter(vartotojas=self.request.user).filter(status__exact='v').order_by('atsiemimo_data')
+        return Uzsakymas.objects.filter(vartotojas=self.request.user).order_by('atsiemimo_data')
 
 @csrf_protect
 def register(request):
@@ -168,6 +169,33 @@ def profilis(request):
         'p_form': p_form,
     }
     return render(request, 'paslaugos/profilis.html', context)
+
+class UzsakymasByUserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Uzsakymas
+    # fields = ['book', 'due_back']
+    success_url = "/paslaugos/manoauto/"
+    template_name = 'paslaugos/user_automobilis_form.html'
+    form_class = UserAutomobilisCreateForm
+
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        return super().form_valid(form)
+
+class UzsakymasByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Uzsakymas
+    fields = ['automobilis', 'grazinimo_data']
+    success_url = "/paslaugos/manoauto/"
+    template_name = 'paslaugos/user_automobilis_form.html'
+
+    def form_valid(self, form):
+        form.instance.vartotojas = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        uzsakymas = self.get_object()
+        return self.request.user == uzsakymas.vartotojas
+
 
 
 
