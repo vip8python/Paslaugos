@@ -13,6 +13,7 @@ from .forms import UzsakymasReviewForm, UserAutomobilisCreateForm
 from django.contrib.auth.decorators import login_required
 from .forms import UzsakymasReviewForm, UserUpdateForm, ProfilisUpdateForm
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.utils.translation import gettext as _
 
 
 def index(request):
@@ -59,6 +60,7 @@ class UzsakymasDetailView(FormMixin, generic.DetailView):
     model = Uzsakymas
     template_name = 'paslaugos/uzsakymas_detail.html'
     form_class = UzsakymasReviewForm
+
     def get_success_url(self):
         return reverse('uzsakymas-detail', kwargs={'pk': self.object.id})
 
@@ -75,6 +77,7 @@ class UzsakymasDetailView(FormMixin, generic.DetailView):
         form.instance.reviewer = self.request.user
         form.save()
         return super(UzsakymasDetailView, self).form_valid(form)
+
 
 def paslauga(request):
     paslauga = Paslauga.objects.all()
@@ -110,8 +113,10 @@ def search(request):
                                                 | Q(vin_kodas__icontains=query))
     return render(request, 'paslaugos/search.html', {'automobilis': search_results, 'query': query})
 
+
 class CustomLogout(LogoutView):
     template_name = 'registration/logged_out.html'
+
 
 class AutoByUserListView(LoginRequiredMixin, generic.ListView):
     model = Uzsakymas
@@ -120,6 +125,7 @@ class AutoByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Uzsakymas.objects.filter(vartotojas=self.request.user).order_by('atsiemimo_data')
+
 
 @csrf_protect
 def register(request):
@@ -133,12 +139,12 @@ def register(request):
         if password == password2:
             # tikriname, ar neužimtas username
             if User.objects.filter(username=username).exists():
-                messages.error(request, f'Vartotojo vardas {username} užimtas!')
+                messages.error(request, _(f'Username {username} already exists'))
                 return redirect('register')
             else:
                 # tikriname, ar nėra tokio pat email
                 if User.objects.filter(email=email).exists():
-                    messages.error(request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
+                    messages.error(request, _(f'Email {email} already exists'))
                     return redirect('register')
                 else:
                     # jeigu viskas tvarkoje, sukuriame naują vartotoją
@@ -146,9 +152,10 @@ def register(request):
                     messages.info(request, f'Vartotojas {username} užregistruotas!')
                     return redirect('login')
         else:
-            messages.error(request, 'Slaptažodžiai nesutampa!')
+            messages.error(request, _('Passwords do not match!'))
             return redirect('register')
     return render(request, 'paslaugos/register.html')
+
 
 @login_required
 def profilis(request):
@@ -170,6 +177,7 @@ def profilis(request):
     }
     return render(request, 'paslaugos/profilis.html', context)
 
+
 class UzsakymasByUserCreateView(LoginRequiredMixin, generic.CreateView):
     model = Uzsakymas
     # fields = ['book', 'due_back']
@@ -177,10 +185,10 @@ class UzsakymasByUserCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'paslaugos/user_automobilis_form.html'
     form_class = UserAutomobilisCreateForm
 
-
     def form_valid(self, form):
         form.instance.reader = self.request.user
         return super().form_valid(form)
+
 
 class UzsakymasByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Uzsakymas
@@ -197,5 +205,11 @@ class UzsakymasByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic
         return self.request.user == uzsakymas.vartotojas
 
 
+class UzsakymasByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Uzsakymas
+    success_url = "/paslaugos/manoauto/"
+    template_name = 'paslaugos/user_uzsakymas_delete.html'
 
-
+    def test_func(self):
+        uzsakymas = self.get_object()
+        return self.request.user == uzsakymas.vartotojas

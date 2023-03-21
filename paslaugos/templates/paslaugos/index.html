@@ -1,17 +1,18 @@
 {% extends "paslaugos/base.html" %}
 {% block content %}
+{% load i18n %}
 <p>Čia jūs lankotes {{ num_visits }}-ą kartą.</p>
-  <h3>Autoservisas</h3>
+  <h3>{% trans "Carservice" %}</h3>
   <p><b>Meniu:</b></p>
   <ul>
-    <li><strong>Paslaugos :</strong>
+    <li><strong>{% trans "Services " %}:</strong>
       {% for i in num_paslauga %}
       {{ i.pavadinimas }},</li>
     {% endfor %}
-    <li><strong>Klientų kiekis:</strong> {{ num_uzsakymas }}</li>
-    <li><strong>Modelių kiekis:</strong> {{ num_modelis }}</li>
-    <li><strong>Automobilių kiekis:</strong> {{ num_automobilis }}</li>
-    <li><strong>Užsakymų kiekis:</strong> {{ num_eilute }}</li>
+    <li><strong>{% trans "Number of customers" %}:</strong> {{ num_uzsakymas }}</li>
+    <li><strong>{% trans "Number of models" %}:</strong> {{ num_modelis }}</li>
+    <li><strong>{% trans "Number of cars" %}:</strong> {{ num_automobilis }}</li>
+    <li><strong>{% trans "Quantity of orders" %}:</strong> {{ num_eilute }}</li>
   </ul>
 
 

@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path, include
 from .views import *
 
 
@@ -21,6 +21,7 @@ urlpatterns = [
     path('manoautomobiliai/new', UzsakymasByUserCreateView.as_view(), name='manoauto_new'),
     path('register/', register, name='register'),
     path('profilis/', profilis, name='profilis'),
-    path('manoautomobiliai/<int:pk>/update', UzsakymasByUserUpdateView.as_view(), name='my-automobiliai-update'),
-    # path('manoautomobiliai/<int:pk>/delete', UzsakymasByUserDeleteView.as_view(), name='my-automobiliai-delete'),
+    path('manoauto/<int:pk>/update', UzsakymasByUserUpdateView.as_view(), name='my-automobiliai-update'),
+    path('manoauto/<int:pk>/delete', UzsakymasByUserDeleteView.as_view(), name='my-automobiliai-delete'),
+    path('i18n/', include('django.conf.urls.i18n')),
     ]
